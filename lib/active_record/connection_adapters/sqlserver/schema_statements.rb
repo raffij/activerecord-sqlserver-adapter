@@ -367,7 +367,8 @@ module ActiveRecord
         end
 
         def identity_column(table_name)
-          schema_cache.columns[table_name].detect(&:is_identity?)
+          table = Utils.unqualify_table_name table_name
+          schema_cache.columns[table].detect(&:is_identity?)
         end
 
       end
