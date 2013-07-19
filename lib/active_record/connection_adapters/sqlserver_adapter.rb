@@ -18,6 +18,8 @@ require 'active_record/connection_adapters/sqlserver/schema_statements'
 require 'active_record/connection_adapters/sqlserver/showplan'
 require 'active_record/connection_adapters/sqlserver/quoting'
 require 'active_record/connection_adapters/sqlserver/utils'
+require 'active_record/connection_adapters/sqlserver/database_tasks'
+
 
 module ActiveRecord
 
@@ -52,6 +54,12 @@ module ActiveRecord
 
   end
 
+  module Tasks
+    module DatabaseTasks
+      register_task(/sqlserver/,ActiveRecord::Tasks::SQLServerDatabaseTasks)
+    end
+  end
+  
   module ConnectionAdapters
 
     class SQLServerColumn < Column
